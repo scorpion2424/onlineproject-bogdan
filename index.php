@@ -4,11 +4,11 @@
 include 'connection.php';
 echo '<br/>';
 ?>
-<div id="wraper">
 <head>
     <title>Online Shop</title>
 <link rel="stylesheet" type="text/css" href="theme.css">
 </head>
+<div id="wrapper">
 <body>
 <button id="adminLogin">Login</button>
 <?php
