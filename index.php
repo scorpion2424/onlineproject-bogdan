@@ -4,7 +4,6 @@
     <title>Online Shop</title>
 </head>
 <body>
-
 </body>
 
 </html>
