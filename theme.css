@@ -5,3 +5,6 @@ table, th, td {
     width: 50px;
     height: 100px;
 }
+#adminLogin{
+    float:right;
+}

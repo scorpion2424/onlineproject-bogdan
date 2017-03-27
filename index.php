@@ -4,11 +4,13 @@
 include 'connection.php';
 echo '<br/>';
 ?>
+<div id="wraper">
 <head>
     <title>Online Shop</title>
 <link rel="stylesheet" type="text/css" href="theme.css">
 </head>
 <body>
+<button id="adminLogin">Login</button>
 <?php
 function listProducts($conn) {
 
@@ -36,6 +38,7 @@ function listProducts($conn) {
 </tr>
 <?php listProducts($conn); ?>
 </table>
+</div>
 </body>
 
 </html>
