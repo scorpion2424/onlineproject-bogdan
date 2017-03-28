@@ -71,5 +71,8 @@ function listProducts($conn) {
     }
 </script>
 </body>
+<?php
+include 'footer.php';
 
+?>
 </html>
