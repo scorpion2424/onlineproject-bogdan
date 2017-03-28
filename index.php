@@ -7,19 +7,26 @@ $_SESSION['product'] = 'phone';
 ?>
 <head>
     <title>Online Shop</title>
-<link rel="stylesheet" type="text/css" href="theme.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="theme.css">
 </head>
 <div id="wrapper">
 <body>
+
 <div id="login">
 <button id="adminLoginButton">Login</button>
+    <input type="text" name="name" id="txt_name" size="30" maxlength="70">
+
     <div id="loginData">
-    <form  action="/adminPage.php" method="post">
+    <form  method="post">
         Username: <input type="username" name="user"><br>
         Password: <input type="password" name="pass"><br>
-        <input type="submit" value="Submit">
     </form>
+        <button id="submitButton">Login </button>
     </div>
+</div>
+<div id="test">
+    <p>ff</p>
 </div>
 <?php
 function listProducts($conn) {
@@ -44,16 +51,25 @@ function listProducts($conn) {
     <th>Name</th>
     <th>Description</th>
     <th>Price</th>
-    <th></th>
+    <th>Buy</th>
 </tr>
 <?php listProducts($conn); ?>
 </table>
 </div>
-<!--<script>
-$("adminLoginButton").click(function(){
-$("#loginData").fadeIn();
+<script>
+    $(document).ready(function(){
+        $("#adminLoginButton").click(function(){
+            $("#loginData").show();
+        });
+    });
+
+    $(document).ready(function(){
+        $("#submitButton").click(function(){
+            name = oForm.elements["name"].value;
+            $('#test').html('Hello World!');
+        });
+    });
 </script>
-});-->
 </body>
 
 </html>
