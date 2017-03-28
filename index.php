@@ -2,6 +2,7 @@
 <html>
 <?php
 include 'connection.php';
+include 'header.php';
 $_SESSION['product'] = 'phone';
 ?>
 <head>
@@ -9,21 +10,8 @@ $_SESSION['product'] = 'phone';
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="theme.css">
 </head>
-<div id="wrapper">
+<div id="content">
 <body>
-
-<div id="loginWrapper">
-<button id="adminLoginButton">Admin's corner</button>
-    <form id="loginData" method="post" action="http://localhost:90/project-bogdan/adminPage.php" onsubmit="return checkscript()">
-        Username: <input type="username" name="user" placeholder="your username..."><br>
-        Password: <input type="password" name="pass" placeholder="your password..."><br>
-        <button id="submitButton" type="submit">Login </button>
-    </form>
-    <div id="loginError">
-        <p>Your data is invalid.Please try again.</p>
-    </div>
-</div>
-<div class="freeSpace"></div>
 <?php
 function listProducts($conn) {
 
@@ -41,6 +29,7 @@ function listProducts($conn) {
     }
 }
 ?>
+<div id="shopFromUs"><span>Shop from us!</span></div>
 <table>
 <tr>
     <th>Image</th>

@@ -9,16 +9,16 @@ table, th, td {
     border: 1px solid black;
 }
 th:not(:first-child) {
-    width: 50px;
-    height: 50px;
+    width: 200px;
+    height: 100px;
 }
 table button{
    /* width: 100px;
     height: 40px;*/
 }
 .productImage {
-    width: 30px;
-    height: 50px;
+    width: 70px;
+    height: 120px;
 }
 #loginData{
     display:none;
@@ -26,7 +26,7 @@ table button{
 #loginWrapper{
     float:right;
     border: 2px solid #a1a1a1;
-    padding: 10px 40px;
+    padding: 10px 0px;
     background: #dddddd;
     width: 300px;
     border-radius: 25px;
@@ -68,6 +68,13 @@ table button{
 }
 .freeSpace{
     clear: both;
+}
+#shopFromUs{
+    text-align: center;
+    margin: 0 auto;
+    font-family: "Book Antiqua",sans-serif;
+    font-size: 2em;
+    margin:30px 10px;
 }
 #footer {
     position: absolute;
