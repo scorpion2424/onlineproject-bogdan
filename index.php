@@ -3,6 +3,7 @@
 <?php
 include 'connection.php';
 echo '<br/>';
+$_SESSION['product'] = 'phone';
 ?>
 <head>
     <title>Online Shop</title>
@@ -10,7 +11,16 @@ echo '<br/>';
 </head>
 <div id="wrapper">
 <body>
-<button id="adminLogin">Login</button>
+<div id="login">
+<button id="adminLoginButton">Login</button>
+    <div id="loginData">
+    <form  action="/adminPage.php" method="post">
+        Username: <input type="username" name="user"><br>
+        Password: <input type="password" name="pass"><br>
+        <input type="submit" value="Submit">
+    </form>
+    </div>
+</div>
 <?php
 function listProducts($conn) {
 
@@ -39,6 +49,11 @@ function listProducts($conn) {
 <?php listProducts($conn); ?>
 </table>
 </div>
+<!--<script>
+$("adminLoginButton").click(function(){
+$("#loginData").fadeIn();
+</script>
+});-->
 </body>
 
 </html>
