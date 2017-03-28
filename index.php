@@ -2,7 +2,6 @@
 <html>
 <?php
 include 'connection.php';
-echo '<br/>';
 $_SESSION['product'] = 'phone';
 ?>
 <head>
@@ -65,8 +64,8 @@ function listProducts($conn) {
 
     $(document).ready(function(){
         $("#submitButton").click(function(){
-            name = oForm.elements["name"].value;
-            $('#test').html('Hello World!');
+            //name =document.getElementById("name").value;
+            document.getElementById("test").innerHTML = "Paragraph changed";
         });
     });
 </script>
