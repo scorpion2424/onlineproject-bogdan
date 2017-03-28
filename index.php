@@ -12,21 +12,18 @@ $_SESSION['product'] = 'phone';
 <div id="wrapper">
 <body>
 
-<div id="login">
-<button id="adminLoginButton">Login</button>
-    <input type="text" name="name" id="txt_name" size="30" maxlength="70">
-
-    <div id="loginData">
-    <form  method="post">
-        Username: <input type="username" name="user"><br>
+<div id="loginWrapper">
+<button id="adminLoginButton">Admin's corner</button>
+    <form id="loginData" method="post" action="/adminPage.php" onsubmit="return checkscript()">
+        Username: <input type="username" name="user"> <br>
         Password: <input type="password" name="pass"><br>
-    </form>
         <button id="submitButton">Login </button>
+    </form>
+    <div id="loginError">
+        <p>Your data is invalid.Please try again.</p>
     </div>
 </div>
-<div id="test">
-    <p>ff</p>
-</div>
+
 <?php
 function listProducts($conn) {
 
@@ -62,12 +59,16 @@ function listProducts($conn) {
         });
     });
 
-    $(document).ready(function(){
-        $("#submitButton").click(function(){
-            //name =document.getElementById("name").value;
-            document.getElementById("test").innerHTML = "Paragraph changed";
-        });
-    });
+   function checkscript() {
+        var  username = document.forms["loginData"]["user"].value;
+        var  password = document.forms["loginData"]["pass"].value;
+        if (username!="admin" && password!="admin") {
+            $("#loginError").show();
+            return false;
+        }
+
+        return true;
+    }
 </script>
 </body>
 

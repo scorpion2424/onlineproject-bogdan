@@ -2,26 +2,32 @@ table{
     border-collapse: collapse;
     text-align: center;
     font-family: Charcoal,sans-serif;
-    font-size: 2em;
+    font-size: 1em;
 }
 table, th, td {
     border: 1px solid black;
 }
 th:not(:first-child) {
     width: 50px;
-    height: 110px;
+    height: 50px;
 }
 table button{
-    width: 100px;
-    height: 40px;
+   /* width: 100px;
+    height: 40px;*/
 }
 .productImage {
-    width: 100px;
-    height: 200px;
+    width: 30px;
+    height: 50px;
 }
 #loginData{
     display:none;
 }
-#login{
+#loginWrapper{
     float:right;
+}
+#loginError{
+    color:red;
+    font-family: Charcoal,sans-serif;
+    font-size: 1em;
+    display: none;
 }
