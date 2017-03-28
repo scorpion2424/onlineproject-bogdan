@@ -25,6 +25,9 @@ table button{
 #loginWrapper{
     float:right;
 }
+#loginData input{
+    margin:10px 10px;
+}
 #loginError{
     color:red;
     font-family: Charcoal,sans-serif;

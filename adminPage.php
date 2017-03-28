@@ -1,5 +1,13 @@
 <?php
 include 'connection.php';
+if (( ! isset($_POST['user']))&&  ( ! isset($_POST['pass'])))
+{
+    header('Location: http://localhost:90/project-bogdan/index.php');
+}
+elseif (( $_POST['user']!="admin")  &&  ($_POST['pass']!="admin"))
+{
+    header('Location: http://localhost:90/project-bogdan/index.php');
+}
 ?>
 <!DOCTYPE html>
 <html>

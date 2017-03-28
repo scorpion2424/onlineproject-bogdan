@@ -14,10 +14,10 @@ $_SESSION['product'] = 'phone';
 
 <div id="loginWrapper">
 <button id="adminLoginButton">Admin's corner</button>
-    <form id="loginData" method="post" action="/adminPage.php" onsubmit="return checkscript()">
-        Username: <input type="username" name="user"> <br>
+    <form id="loginData" method="post" action=" http://localhost:90/project-bogdan/adminPage.php" onsubmit="return checkscript()">
+        Username: <input type="username" name="user"><br>
         Password: <input type="password" name="pass"><br>
-        <button id="submitButton">Login </button>
+        <button id="submitButton" type="submit">Login </button>
     </form>
     <div id="loginError">
         <p>Your data is invalid.Please try again.</p>
@@ -58,11 +58,10 @@ function listProducts($conn) {
             $("#loginData").show();
         });
     });
-
    function checkscript() {
         var  username = document.forms["loginData"]["user"].value;
         var  password = document.forms["loginData"]["pass"].value;
-        if (username!="admin" && password!="admin") {
+        if (username!=="admin" && password!=="admin") {
             $("#loginError").show();
             return false;
         }
