@@ -5,16 +5,15 @@ table{
     font-family: Charcoal,sans-serif;
     font-size: 1em;
 }
+table a{
+    text-decoration: none;
+}
 table, th, td {
     border: 1px solid black;
 }
 th:not(:first-child) {
     width: 200px;
     height: 100px;
-}
-table button{
-   /* width: 100px;
-    height: 40px;*/
 }
 .productImage {
     width: 70px;
@@ -72,6 +71,7 @@ table button{
 #cart img{
 width: 100px;
 height: 100px;
+padding-left: 60px;
 }
 
 #cart{
@@ -91,6 +91,9 @@ font-family: "Book Antiqua",sans-serif;
     font-family: "Book Antiqua",sans-serif;
     font-size: 2em;
     margin:30px 10px;
+}
+.processOrder a{
+    text-decoration: none;
 }
 #userDetails{
     text-align: center;

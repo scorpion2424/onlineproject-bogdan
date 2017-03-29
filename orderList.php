@@ -44,7 +44,7 @@ function listProducts($conn)
         $productsNumber=0;
         ?>
         <div id="shopFromUs"><span>Your cart is empty.</span>
-            <span clas="processOrder">Add some products in the bascket:<a href="http://localhost:90/project-bogdan/index.php">Home</a></span>
+            <span class="processOrder">Add some products in the bascket: <a href="http://localhost:90/project-bogdan/index.php">Home</a></span>
         </div>
         <?php
     }
