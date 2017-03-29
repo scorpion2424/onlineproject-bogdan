@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html>
+<body>
 <?php
+
 include 'connection.php';
 include 'header.php';
-$_SESSION['product'] = 'phone';
+//session_unset();
 ?>
-<head>
-    <title>Online Shop</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="theme.css">
-</head>
-<div id="content">
-<body>
+<div id="wrapper">
+
+<?php
+?>
 <?php
 function listProducts($conn) {
 
-    $sql = 'SELECT Image, Name,  Description, Price  FROM products';
+    $sql = 'SELECT ID, Image, Name,  Description, Price  FROM products';
     foreach ($conn->query($sql) as $row) {
         ?>
+
         <tr>
         <td>  <img class ="productImage" src="<?php print strip_tags($row['Image']); ?>"  </td>
         <td> <?php print strip_tags($row['Name']) ?> </td>
         <td> <?php print strip_tags($row['Description']) ?> </td>
         <td> <?php print strip_tags($row['Price']) ?> </td>
-        <td> <button>Add to cart</button></td>
+       <td> <a href="http://localhost:90/project-bogdan/orderList.php?product=<?php echo strip_tags($row['ID']);?> ">Add to cart</a></td>
         </tr>
         <?php
     }
@@ -40,28 +40,12 @@ function listProducts($conn) {
 </tr>
 <?php listProducts($conn); ?>
 </table>
-</div>
-<script>
-    $(document).ready(function(){
-        $("#adminLoginButton").click(function(){
-            $("#loginData").show();
-            $("#adminLoginButton").hide();
-        });
-    });
-   function checkscript() {
-        var  username = document.forms["loginData"]["user"].value;
-        var  password = document.forms["loginData"]["pass"].value;
-        if (username!=="admin" && password!=="admin") {
-            $("#loginError").show();
-            return false;
-        }
 
-        return true;
-    }
-</script>
+
+
 </body>
 <?php
 include 'footer.php';
-
 ?>
+</div>
 </html>

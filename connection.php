@@ -1,8 +1,9 @@
 <?php
-session_start();
 $servername = "localhost:3306";
 $username = "root";
 $password = "Etc3t3r4";
+
+session_start();
 
 try {
 $conn = new PDO("mysql:host=$servername;dbname=shop", $username, $password);
