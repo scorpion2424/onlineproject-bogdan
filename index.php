@@ -8,9 +8,8 @@ include 'header.php';
 //session_unset();
 ?>
 <div id="wrapper">
+    <div id="content">
 
-<?php
-?>
 <?php
 function listProducts($conn) {
 
@@ -30,6 +29,7 @@ function listProducts($conn) {
 }
 ?>
 <div id="shopFromUs"><span>Shop from us!</span></div>
+        <div id="cart"><a href="http://localhost:90/project-bogdan/orderList.php">Check your cart:</a></div>
 <table>
 <tr>
     <th>Image</th>
@@ -40,7 +40,7 @@ function listProducts($conn) {
 </tr>
 <?php listProducts($conn); ?>
 </table>
-
+</div>
 
 
 </body>
