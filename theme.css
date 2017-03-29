@@ -69,6 +69,19 @@ table button{
     font-size: 1em;
     display: none;
 }
+#cart img{
+width: 100px;
+height: 100px;
+}
+
+#cart{
+font-size: 2em;
+font-family: "Book Antiqua",sans-serif;
+
+}
+#cart a{
+    text-decoration: none;
+}
 .freeSpace{
     clear: both;
 }

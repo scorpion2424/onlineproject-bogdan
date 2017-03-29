@@ -29,7 +29,9 @@ function listProducts($conn) {
 }
 ?>
 <div id="shopFromUs"><span>Shop from us!</span></div>
-        <div id="cart"><a href="http://localhost:90/project-bogdan/orderList.php">Check your cart:</a></div>
+        <div id="cart"><a href="http://localhost:90/project-bogdan/orderList.php">Check your cart:
+                <br/><img src="cart.png"/></a>
+        </div>
 <table>
 <tr>
     <th>Image</th>
