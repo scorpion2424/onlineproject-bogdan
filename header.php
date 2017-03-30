@@ -49,7 +49,7 @@ if((isset($_SESSION['user'])) && (isset($_SESSION['pass'])) && ($_SESSION['user'
             </script>
             <?php
         } ?>
-<div id="shopFromUs"><span>Shop from us!</span></div>
+<div id="shopFromUs"><a href="http://localhost:90/project-bogdan/index.php"><span>Shop from us!</span></a></div>
         <div id="cart"><a href="http://localhost:90/project-bogdan/orderList.php">Check your cart:
                 <br/><img src="cart.png"/></a>
         </div>
