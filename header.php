@@ -11,6 +11,7 @@ if((isset($_SESSION['user'])) && (isset($_SESSION['pass'])) && ($_SESSION['user'
     ?>
     <div id="loginWrapper">
     <button id="adminLoginButton" onclick="window.location.href='http://localhost:90/project-bogdan/adminPage.php'">Admin's page</button>
+    <button  onclick="window.location.href='http://localhost:90/project-bogdan/logout.php'">Logout</button>
     </div>
     <div class="freeSpace"></div>
 <?php

@@ -1,23 +1,8 @@
 <?php
 include 'connection.php';
-if ((  isset($_POST['user'])) && ($_POST['user'])=='admin' && (  isset($_POST['pass'])) && ($_POST['pass'])=='admin')
-{
-    $_SESSION['user']=$_POST['user'];
-    $_SESSION['pass']=$_POST['pass'];
-}
-if (( ! isset($_SESSION['user'])) ||  ( ! isset($_SESSION['pass'])))
-{
-    header('Location: http://localhost:90/project-bogdan/index.php');
-}
-if (( $_SESSION['user']!="admin")  || ($_SESSION['pass']!="admin"))
-{
-    header('Location: http://localhost:90/project-bogdan/index.php');
-}
+include 'checkLogin.php';
 include 'header.php';
 ?>
-<!DOCTYPE html>
-<html>
-<head>
     <title>Online Shop</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="theme.css">
@@ -34,13 +19,15 @@ foreach ($conn->query($sql) as $row) {
     <td> <?php print strip_tags($row['Description']) ?> </td>
     <td> <?php print strip_tags($row['Price']) ?> </td>
     <td> <a href="http://localhost:90/project-bogdan/editProduct.php?product=<?php echo strip_tags($row['ID']);?> ">Edit</a></td>
-    <td> <button>Delete</button></td>
+    <td> <a href="http://localhost:90/project-bogdan/deleteDone.php?product=<?php echo htmlentities($row['ID']);?> ">Delete</a></td>
     <td> <a href="http://localhost:90/project-bogdan/orderList.php?product=<?php echo strip_tags($row['ID']);?> ">Add to cart</a></td>
 </tr>
 <?php
 }
 }
 ?>
+    <div id="addProductButton"><a href="http://localhost:90/project-bogdan/addProduct.php"><span>Add a product</span></a></div>
+    </br>
 <table>
 <tr>
     <th>Image</th>
@@ -54,4 +41,17 @@ foreach ($conn->query($sql) as $row) {
 </tr>
 <?php listProducts($conn); ?>
 </table>
-</html>
+    <script>
+        function DeleteAlert() {
+
+            if (confirm("Are you sure do you want to delete this product?") == true) {
+            // window.open('http://localhost:90/project-bogdan/deleteDone.php', '_self');
+                return true;
+            }
+        return false;
+        }
+    </script>
+<?php
+include 'footer.php';
+
+?>

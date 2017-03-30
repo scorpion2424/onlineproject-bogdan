@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html>
 <body>
 <div id="wrapper">
 <?php
@@ -16,12 +14,6 @@ if(isset($_GET['product'])) {
     array_push($order, $_GET['product']);
     $_SESSION['userCommand'] = $order;
 }
-/*print_r($_SESSION['userCommand']);
-foreach($_SESSION['userCommand'] as $val)
-{
-
-    echo $val.'<br>';
-}*/
 function listProducts($conn)
 {
 
@@ -88,4 +80,3 @@ include 'footer.php';
 ?>
 </div>
 </body>
-</html>

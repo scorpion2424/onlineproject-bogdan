@@ -123,6 +123,16 @@ font-family: "Book Antiqua",sans-serif;
     font-size: 2em;
     margin-bottom: 20px;
 }
+#addProductButton{
+    text-align: center;
+    margin: 0 auto;
+}
+#addProductButton a{
+    text-decoration: none;
+    font-family: "Book Antiqua",sans-serif;
+    font-size: 2em;
+    color: goldenrod;
+}
 #footer {
     position: relative;
     right: 0;
