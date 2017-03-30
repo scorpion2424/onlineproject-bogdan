@@ -50,8 +50,8 @@
             <?php }
         }
     $to      = $_GET['email'];
-    $subject = listProducts($conn);
-    $message = 'Bellow is your order';
+    $subject = 'Bellow is your order';
+        $message = listProducts($conn);
     $headers = 'From: webmaster@shop.com' . "\r\n" .
         'X-Mailer: PHP/' . phpversion();
 
@@ -59,7 +59,7 @@
         session_unset();
     ?>
         <p>In short time you will receive an email about your order.Thank you for chosing us!</p>
-        <a href="http://localhost:90/project-bogdan/index.php">Return to front page.</a>
+        <a href="http://localhost:90/project-bogdan/index.php">Return to main page.</a>
     </div>
 
     <?php    include 'footer.php'; ?>

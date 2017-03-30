@@ -6,6 +6,7 @@
 include 'connection.php';
 include 'header.php';
 //session_unset();
+
 ?>
 <div id="wrapper">
     <div id="content">
@@ -19,7 +20,7 @@ function listProducts($conn) {
 
         <tr>
         <td>  <img class ="productImage" src="<?php print strip_tags($row['Image']); ?>"  </td>
-        <td> <?php print strip_tags($row['Name']) ?> </td>
+        <td> <?php print htmlentities($row['Name']) ?> </td>
         <td> <?php print strip_tags($row['Description']) ?> </td>
         <td> <?php print strip_tags($row['Price']) ?> </td>
        <td> <a href="http://localhost:90/project-bogdan/orderList.php?product=<?php echo strip_tags($row['ID']);?> ">Add to cart</a></td>
