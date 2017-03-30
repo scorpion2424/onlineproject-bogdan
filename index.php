@@ -1,8 +1,4 @@
-<!DOCTYPE html>
-<html>
-<body>
 <?php
-
 include 'connection.php';
 include 'header.php';
 //session_unset();
@@ -19,20 +15,17 @@ function listProducts($conn) {
         ?>
 
         <tr>
-        <td>  <img class ="productImage" src="<?php print strip_tags($row['Image']); ?>"  </td>
+        <td>  <img class ="productImage" src="<?php print htmlentities($row['Image']); ?>"  </td>
         <td> <?php print htmlentities($row['Name']) ?> </td>
-        <td> <?php print strip_tags($row['Description']) ?> </td>
-        <td> <?php print strip_tags($row['Price']) ?> </td>
-       <td> <a href="http://localhost:90/project-bogdan/orderList.php?product=<?php echo strip_tags($row['ID']);?> ">Add to cart</a></td>
+        <td> <?php print htmlentities($row['Description']) ?> </td>
+        <td> <?php print htmlentities($row['Price']) ?> </td>
+       <td> <a href="http://localhost:90/project-bogdan/orderList.php?product=<?php echo htmlentities($row['ID']);?> ">Add to cart</a></td>
         </tr>
         <?php
     }
 }
 ?>
-<div id="shopFromUs"><span>Shop from us!</span></div>
-        <div id="cart"><a href="http://localhost:90/project-bogdan/orderList.php">Check your cart:
-                <br/><img src="cart.png"/></a>
-        </div>
+
 <table>
 <tr>
     <th>Image</th>
@@ -51,4 +44,3 @@ function listProducts($conn) {
 include 'footer.php';
 ?>
 </div>
-</html>

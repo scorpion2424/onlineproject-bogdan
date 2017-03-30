@@ -13,6 +13,7 @@ if (( $_SESSION['user']!="admin")  || ($_SESSION['pass']!="admin"))
 {
     header('Location: http://localhost:90/project-bogdan/index.php');
 }
+include 'header.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,7 +25,7 @@ if (( $_SESSION['user']!="admin")  || ($_SESSION['pass']!="admin"))
 <?php
 function listProducts($conn) {
 
-$sql = 'SELECT Image, Name,  Description, Price  FROM products';
+$sql = 'SELECT ID,Image, Name,  Description, Price  FROM products';
 foreach ($conn->query($sql) as $row) {
 ?>
 <tr>
@@ -32,9 +33,9 @@ foreach ($conn->query($sql) as $row) {
     <td> <?php print strip_tags($row['Name']) ?> </td>
     <td> <?php print strip_tags($row['Description']) ?> </td>
     <td> <?php print strip_tags($row['Price']) ?> </td>
-    <td> <button>Edit</button></td>
+    <td> <a href="http://localhost:90/project-bogdan/editProduct.php?product=<?php echo strip_tags($row['ID']);?> ">Edit</a></td>
     <td> <button>Delete</button></td>
-    <td> <button>Add to cart</button></td>
+    <td> <a href="http://localhost:90/project-bogdan/orderList.php?product=<?php echo strip_tags($row['ID']);?> ">Add to cart</a></td>
 </tr>
 <?php
 }
