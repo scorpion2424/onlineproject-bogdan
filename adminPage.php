@@ -41,16 +41,6 @@ foreach ($conn->query($sql) as $row) {
 </tr>
 <?php listProducts($conn); ?>
 </table>
-    <script>
-        function DeleteAlert() {
-
-            if (confirm("Are you sure do you want to delete this product?") == true) {
-            // window.open('http://localhost:90/project-bogdan/deleteDone.php', '_self');
-                return true;
-            }
-        return false;
-        }
-    </script>
 <?php
 include 'footer.php';
 
