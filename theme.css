@@ -11,13 +11,19 @@ table a{
 table, th, td {
     border: 1px solid black;
 }
-th:not(:first-child) {
+table th{
     width: 200px;
     height: 100px;
 }
 .productImage {
     width: 70px;
     height: 120px;
+}
+.productImageWrapper img{
+z-index: -1;
+}
+.addNewImage{
+    margin-left:40px;
 }
 #loginData{
     display:none;
