@@ -15,7 +15,7 @@ function listProducts($conn) {
         ?>
 
         <tr>
-        <td>  <img class ="productImage" src="<?php print htmlentities($row['Image']); ?>"  </td>
+        <td>  <img class ="productImage" src="images/<?php print htmlentities($row['Image']); ?>"  </td>
         <td> <?php print htmlentities($row['Name']) ?> </td>
         <td> <?php print htmlentities($row['Description']) ?> </td>
         <td> <?php print htmlentities($row['Price']) ?> </td>
