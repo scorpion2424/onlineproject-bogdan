@@ -14,12 +14,12 @@ $sql = 'SELECT ID,Image, Name,  Description, Price  FROM products';
 foreach ($conn->query($sql) as $row) {
 ?>
 <tr>
-    <td>  <img class ="productImage" src="<?php print strip_tags($row['Image']); ?>"  </td>
-    <td> <?php print strip_tags($row['Name']) ?> </td>
-    <td> <?php print strip_tags($row['Description']) ?> </td>
+    <td>  <img class ="productImage" src="<?php print htmlentities($row['Image']); ?>"  </td>
+    <td> <?php print htmlentities($row['Name']) ?> </td>
+    <td> <?php print htmlentities($row['Description']) ?> </td>
     <td> <?php print strip_tags($row['Price']) ?> </td>
-    <td> <a href="http://localhost:90/project-bogdan/editProduct.php?product=<?php echo strip_tags($row['ID']);?> ">Edit</a></td>
-    <td> <a href="http://localhost:90/project-bogdan/deleteDone.php?product=<?php echo htmlentities($row['ID']);?> ">Delete</a></td>
+    <td> <a href="http://localhost:90/project-bogdan/addProduct.php?product=<?php echo strip_tags($row['ID']);?> ">Edit</a></td>
+    <td> <a href="http://localhost:90/project-bogdan/deleteDone.php?product=<?php echo strip_tags($row['ID']);?> ">Delete</a></td>
     <td> <a href="http://localhost:90/project-bogdan/orderList.php?product=<?php echo strip_tags($row['ID']);?> ">Add to cart</a></td>
 </tr>
 <?php

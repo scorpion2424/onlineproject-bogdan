@@ -7,11 +7,11 @@
     <link rel="stylesheet" type="text/css" href="theme.css">
 </head>
 <?php
-if((isset($_SESSION['user'])) && (isset($_SESSION['pass'])) && ($_SESSION['user']==='admin') && $_SESSION['pass']==='admin'){
+if((isset($_SESSION['user'])) && ($_SESSION['user']==='admin')){
     ?>
     <div id="loginWrapper">
-    <button id="adminLoginButton" onclick="window.location.href='http://localhost:90/project-bogdan/adminPage.php'">Admin's page</button>
-    <button  onclick="window.location.href='http://localhost:90/project-bogdan/logout.php'">Logout</button>
+        <button id="adminLoginButton" onclick="window.location.href='http://localhost:90/project-bogdan/adminPage.php'">Admin's page</button>
+        <button  onclick="window.location.href='http://localhost:90/project-bogdan/logout.php'">Logout</button>
     </div>
     <div class="freeSpace"></div>
 <?php
@@ -20,8 +20,7 @@ if((isset($_SESSION['user'])) && (isset($_SESSION['pass'])) && ($_SESSION['user'
             ?>
             <div id="loginWrapper">
                 <button id="adminLoginButton">Admin's login</button>
-                <form id="loginData" method="post" action="http://localhost:90/project-bogdan/adminPage.php"
-                      onsubmit=" return checkscript()">
+                <form id="loginData" method="post" action="http://localhost:90/project-bogdan/adminPage.php"">
                     Username: <input type="username" name="user" placeholder="your username..."><br>
                     Password: <input type="password" name="pass" placeholder="your password..."><br>
                     <button id="submitButton" type="submit">Login</button>
@@ -37,16 +36,13 @@ if((isset($_SESSION['user'])) && (isset($_SESSION['pass'])) && ($_SESSION['user'
                         $("#loginData").show();
                         $("#adminLoginButton").hide();
                     });
-                });
+                });/*
                 function checkscript() {
                     var username = document.forms["loginData"]["user"].value;
                     var password = document.forms["loginData"]["pass"].value;
-                    if (username === "admin" && password === "admin") {
-                        return true;
-                    }
                     $("#loginError").show();
                     return false;
-                }
+                }*/
             </script>
             <?php
         } ?>
