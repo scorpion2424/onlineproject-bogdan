@@ -3,7 +3,7 @@ include 'connection.php';
 include 'checkLogin.php';
 include 'header.php';
 function addImage(){
-    if(isset($_FILES['image'])){
+
         $errors= array();
         $file_name = $_FILES['image']['name'];
         $file_size =$_FILES['image']['size'];
@@ -23,31 +23,62 @@ function addImage(){
 
         if(empty($errors)==true){
             move_uploaded_file($file_tmp,"images/".$file_name);
-            echo "Success";
+           // echo "Success";
         }else{
             print_r($errors);
         }
+}
+if(isset($_FILES['image'])) {
+    addImage();
+}
+if(!isset($_GET['product'])) {
+    try {
+        $stmt = $conn->prepare("INSERT INTO `products`(Image,Name,Description,Price)  VALUES (:productImage, :productName, :productDescription, :productPrice) ");
+
+        // echo $_POST['productName'],$_POST['description'],$_POST['price'];
+        $productImage = $_FILES['image']['name'];
+        $stmt->bindParam(':productImage', strip_tags($productImage));
+        $stmt->bindParam(':productName', strip_tags($_POST["productName"]));
+        $stmt->bindParam(':productDescription', strip_tags($_POST["description"]));
+        $stmt->bindParam(':productPrice', strip_tags($_POST["price"]));
+
+        $stmt->execute();
+        // echo "Product updated";
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
     }
 }
 
-addImage();
+elseif(isset($_GET['product'])){
+    try {
 
-try {
-    $stmt = $conn->prepare("INSERT INTO `products`(Image,Name,Description,Price)  VALUES (:productImage, :productName, :productDescription, :productPrice) ");
+//echo $_GET['product'],$_POST['productName'],$_POST['description'],$_POST['price'];
+        if(isset($_FILES['image'])) {
+            $productImage = $_FILES['image']['name'];
+            $stmt = $conn->prepare("UPDATE `products` SET `Image` = :productImage, `name` = :productName , `description`=:productDescription ,
+                          `price`=:productPrice WHERE `ID` = :productID ");
+            $stmt->bindParam(':productImage', $productImage);
+        }
+        elseif(!isset($_FILES['image'])){
 
-   // echo $_POST['productName'],$_POST['description'],$_POST['price'];
-    $productImage=$_FILES['image']['name'];
-    $stmt->bindParam(':productImage', strip_tags($productImage));
-    $stmt->bindParam(':productName', strip_tags($_POST["productName"]));
-    $stmt->bindParam(':productDescription', strip_tags($_POST["description"]));
-    $stmt->bindParam(':productPrice', strip_tags($_POST["price"]));
+            $stmt = $conn->prepare("UPDATE `products` SET  `name` = :productName , `description`=:productDescription ,
+                          `price`=:productPrice WHERE `ID` = :productID ");
+        }
 
-    $stmt->execute();
-    // echo "Product updated";
-}
-catch(PDOException $e)
-{
-    echo "Error: " . $e->getMessage();
+        $stmt->bindParam(':productID', strip_tags($_GET['product']));
+        $stmt->bindParam(':productName', strip_tags($_POST["productName"]));
+        $stmt->bindParam(':productDescription', strip_tags($_POST["description"]));
+        $stmt->bindParam(':productPrice', strip_tags($_POST["price"]));
+
+
+
+        $stmt->execute();
+        // echo "Product updated";
+    }
+    catch(PDOException $e)
+    {
+        echo "Error: " . $e->getMessage();
+    }
 }
 header('Location: http://localhost:90/project-bogdan/adminPage.php');
 exit();

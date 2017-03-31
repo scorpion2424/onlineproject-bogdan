@@ -44,9 +44,9 @@ function addProduct($conn)
         foreach ($conn->query($sql) as $row) {
             ?>
             <form id="editDetails" method="post"
-                  action="http://localhost:90/project-bogdan/editProductDone.php?product=<?php echo htmlentities($row['ID']) ?> " enctype="multipart/form-data">
+                  action="http://localhost:90/project-bogdan/addProductDone.php?product=<?php echo htmlentities($row['ID']) ?> " enctype="multipart/form-data">
                 <tr>
-                    <td><div class="productImageWrapper"><span class="addNewImage"><input type="file" name="image" id="fileToUpload"></span><img class="productImage" src="images/<?php print htmlentities($row['Image']); ?>"</div></td>
+                    <td><div class="productImageWrapper"><span class="addNewImage">Add a new image:<br><input type="file" name="image" id="fileToUpload"></span><img class="productImage" src="images/<?php print htmlentities($row['Image']); ?>"</div></td>
                     <td><input type="text" name="productName" value="<?php echo htmlentities($row['Name']) ?>"><br></td>
                     <td><input type="text" name="description"
                                value="<?php echo htmlentities($row['Description']) ?>"><br></td>

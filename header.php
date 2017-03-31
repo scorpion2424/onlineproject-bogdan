@@ -36,13 +36,7 @@ if((isset($_SESSION['user'])) && ($_SESSION['user']==='admin')){
                         $("#loginData").show();
                         $("#adminLoginButton").hide();
                     });
-                });/*
-                function checkscript() {
-                    var username = document.forms["loginData"]["user"].value;
-                    var password = document.forms["loginData"]["pass"].value;
-                    $("#loginError").show();
-                    return false;
-                }*/
+                });
             </script>
             <?php
         } ?>
