@@ -2,7 +2,6 @@
 include 'connection.php';
 include 'checkLogin.php';
 include 'header.php';
-//if(!isset($_FILES['image']) && (!isset(strip_tags($_POST["productName"]))) && (!isset(strip_tags($_POST["description"]))) && (!isset(strip_tags($_POST["price"])))){
 if($_FILES['image']['size']<1 && strlen(trim(strip_tags($_POST['productName'])))===0 &&
        strlen(trim(strip_tags($_POST['description'])))===0 &&
        !(is_numeric($_POST['price']))){
@@ -42,7 +41,6 @@ if(!isset($_GET['product'])) {
     try {
         $stmt = $conn->prepare("INSERT INTO `products`(Image,Name,Description,Price)  VALUES (:productImage, :productName, :productDescription, :productPrice) ");
 
-        // echo $_POST['productName'],$_POST['description'],$_POST['price'];
         $productImage = $_FILES['image']['name'];
         $stmt->bindParam(':productImage', strip_tags($productImage));
         $stmt->bindParam(':productName', strip_tags($_POST["productName"]));
@@ -59,14 +57,13 @@ if(!isset($_GET['product'])) {
 elseif(isset($_GET['product'])){
     try {
 
-//echo $_GET['product'],$_POST['productName'],$_POST['description'],$_POST['price'];
-        if(isset($_FILES['image'])) {
+        if(isset($_FILES['image']) &&  $_FILES['image']['size']>0) {
             $productImage = $_FILES['image']['name'];
             $stmt = $conn->prepare("UPDATE `products` SET `Image` = :productImage, `name` = :productName , `description`=:productDescription ,
                           `price`=:productPrice WHERE `ID` = :productID ");
             $stmt->bindParam(':productImage', $productImage);
         }
-        elseif(!isset($_FILES['image'])){
+        elseif(!isset($_FILES['image']) || $_FILES['image']['size']<1){
 
             $stmt = $conn->prepare("UPDATE `products` SET  `name` = :productName , `description`=:productDescription ,
                           `price`=:productPrice WHERE `ID` = :productID ");
@@ -87,6 +84,6 @@ elseif(isset($_GET['product'])){
         echo "Error: " . $e->getMessage();
     }
 }
-//header('Location: http://localhost:90/project-bogdan/adminPage.php');
-//exit();
+header('Location: http://localhost:90/project-bogdan/adminPage.php');
+exit();
 ?>
