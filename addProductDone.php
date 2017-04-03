@@ -2,12 +2,26 @@
 include 'connection.php';
 include 'checkLogin.php';
 include 'header.php';
-if($_FILES['image']['size']<1 && strlen(trim(strip_tags($_POST['productName'])))===0 &&
-       strlen(trim(strip_tags($_POST['description'])))===0 &&
-       !(is_numeric($_POST['price']))){
-header ('Location: http://localhost:90/project-bogdan/adminPage.php');
-    exit();
+/*
+echo strlen(trim(strip_tags($_POST['productName'])));
+echo strlen(trim(strip_tags($_POST['description'])));
+if( is_numeric($_POST['price'])){
+    echo 'is numeric';
 }
+else{
+    echo 'is NOT numeric';
+}
+
+*/
+if(strlen(trim(strip_tags($_POST['productName'])))===0 &&
+       strlen(trim(strip_tags($_POST['description'])))===0 &&
+       !is_numeric($_POST['price'])){
+
+           header ('Location: http://localhost:90/project-bogdan/adminPage.php');
+            exit();
+
+}
+
 function addImage(){
 
         $errors= array();
@@ -32,9 +46,11 @@ function addImage(){
            // echo "Success";
         }else{
             print_r($errors);
+            header('Location: http://localhost:90/project-bogdan/adminPage.php');
+            exit();
         }
 }
-if(isset($_FILES['image'])) {
+if(isset($_FILES['image']) && $_FILES['image']['size']>0) {
     addImage();
 }
 if(!isset($_GET['product'])) {
@@ -84,6 +100,7 @@ elseif(isset($_GET['product'])){
         echo "Error: " . $e->getMessage();
     }
 }
+include 'footer.php';
 header('Location: http://localhost:90/project-bogdan/adminPage.php');
 exit();
 ?>
