@@ -5,9 +5,10 @@
     <?php
     include 'connection.php';
     include 'header.php';
+    $email_order=array();
     ?>
     <div id="content">
- */ <?php
+        <?php
         function listProducts($conn)
         {
 
@@ -50,24 +51,86 @@
             <?php }
         }
 
+        function insertProductsInEmail($conn){
+            $email_order=array();
+            array_push($email_order,
+                '<table>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+            </tr>');
 
+            $sql = 'SELECT ID, Image, Name,  Description, Price  FROM products';
+            foreach ($conn->query($sql) as $row) {
 
+                array_push($email_order,'<tr>');
+                array_push($email_order,'<td>');  array_push($email_order, htmlentities($row['Name'])); array_push($email_order,'</td>');
+                array_push($email_order,'<td>'); array_push($email_order, htmlentities($row['Price'])); array_push($email_order,'</td>');
+                array_push($email_order,'</tr>');
 
+            };
+            array_push($email_order,'</table>');
+            array_push($email_order,'<style> table{
+             margin:0 auto;
+            border-collapse: collapse;
+            text-align: center;
+            font-family: Charcoal,sans-serif;
+            font-size: 1em;
+           }
+        table a{
+            text-decoration: none;
+           }
+        table, th, td {
+            border: 1px solid black;
+          }
+        </style>');
+            $email_order=implode($email_order);
+            return $email_order;
 
+    }
 
+        function sendEmail($conn)
+        {
 
+            $email = $_REQUEST['email'];
+            $message = '';
 
+            require("PHPMailer/PHPMailerAutoload.php");
+            $mail = new PHPMailer();
 
+            $mail->IsSMTP();
+            //$mail->SMTPDebug = 1;
+            $mail->Host = "smtp.gmail.com";
 
+            $mail->SMTPAuth = true;
+            $mail->Port = 465;
+            $mail->SMTPSecure = 'ssl';
+            $mail->Username = "twsallo2016@gmail.com";
+            $mail->Password = "proiecttw2016";
 
+            $mail->From = $email;
 
+            $mail->AddAddress("garfield1333@gmail.com", "garfield");
 
+            $mail->IsHTML(true);
 
+            $mail->Subject = "hello from sallo";
+            $mail->Body = insertProductsInEmail($conn);
+            $mail->AltBody = $message;
 
+            if (!$mail->Send()) {
+                echo "<p>Message could not be sent.";
+                echo "Mailer Error: " . $mail->ErrorInfo;
+                exit;
+            }
 
+        echo "<p>Message has been sent.You will receive in short time an email about your order.Thank you for choosing us!</p>";
 
+        }
 
-
+        listProducts($conn);
+        insertProductsInEmail($conn);
+        sendEmail($conn);
         session_unset();
     ?>
         <p>In short time you will receive an email about your order.Thank you for chosing us!</p>
@@ -76,5 +139,3 @@
 
     <?php    include 'footer.php'; ?>
 </div>
-</body>
-</html>
