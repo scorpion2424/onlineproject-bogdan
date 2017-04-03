@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html>
-<body>
-<div id="wrapper">
 <?php
 include 'connection.php';
 include 'header.php';
 ?>
+<div id="wrapper">
     <div id="content">
         <div id="userInformationsTitle">Please complete your informations:</div>
         <div id="userDetails">
@@ -20,5 +17,3 @@ include 'header.php';
 
 <?php    include 'footer.php'; ?>
     </div>
-</body>
-</html>

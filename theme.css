@@ -139,6 +139,13 @@ font-family: "Book Antiqua",sans-serif;
     font-size: 2em;
     color: goldenrod;
 }
+.returnMainPage{
+    text-align: center;
+    margin: 0 auto;
+    font-family: "Book Antiqua",sans-serif;
+    font-size: 2em;
+    margin:30px 10px;
+}
 #footer {
     position: relative;
     right: 0;

@@ -1,16 +1,15 @@
-<!DOCTYPE html>
-<html>
-<body>
 <div id="wrapper">
     <?php
     include 'connection.php';
     include 'header.php';
-    $email_order=array();
+    print_r($email_order);
     ?>
     <div id="content">
         <?php
         function listProducts($conn)
         {
+
+
 
             if(isset($_SESSION['userCommand']) && count($_SESSION['userCommand'])>0){
                 $productsNumber=count($_SESSION['userCommand']);
@@ -36,7 +35,7 @@
                     ?>
 
                     <tr>
-                        <td><img class="productImage" src="<?php print strip_tags($row['Image']); ?>"</td>
+                        <td><img class="productImage" src="images/<?php print strip_tags($row['Image']); ?>"</td>
                         <td> <?php print strip_tags($row['Name']) ?> </td>
                         <td> <?php print strip_tags($row['Description']) ?> </td>
                         <td> <?php print strip_tags($row['Price']) ?> </td>
@@ -53,6 +52,8 @@
 
         function insertProductsInEmail($conn){
             $email_order=array();
+            $totalPriceProducts=0;
+            array_push($email_order,'Hello Mr./Ms. ',strip_tags($_POST['firstName']),' ',strip_tags($_POST['lastName']),',','<br/>');
             array_push($email_order,
                 '<table>
             <tr>
@@ -67,7 +68,7 @@
                 array_push($email_order,'<td>');  array_push($email_order, htmlentities($row['Name'])); array_push($email_order,'</td>');
                 array_push($email_order,'<td>'); array_push($email_order, htmlentities($row['Price'])); array_push($email_order,'</td>');
                 array_push($email_order,'</tr>');
-
+                $totalPriceProducts+= htmlentities($row['Price']);
             };
             array_push($email_order,'</table>');
             array_push($email_order,'<style> table{
@@ -84,6 +85,7 @@
             border: 1px solid black;
           }
         </style>');
+            array_push($email_order,'<br/>', 'Total price: <b>',$totalPriceProducts, '</b>');
             $email_order=implode($email_order);
             return $email_order;
 
@@ -110,11 +112,11 @@
 
             $mail->From = $email;
 
-            $mail->AddAddress("garfield1333@gmail.com", "garfield");
+            $mail->AddAddress(strip_tags($_POST['email']));
 
             $mail->IsHTML(true);
 
-            $mail->Subject = "hello from sallo";
+            $mail->Subject = "Your order:";
             $mail->Body = insertProductsInEmail($conn);
             $mail->AltBody = $message;
 
@@ -133,9 +135,7 @@
         sendEmail($conn);
         session_unset();
     ?>
-        <p>In short time you will receive an email about your order.Thank you for chosing us!</p>
         <a href="http://localhost:90/project-bogdan/index.php">Return to main page.</a>
-    </div>
 
     <?php    include 'footer.php'; ?>
 </div>
