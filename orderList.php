@@ -49,7 +49,7 @@ function listProducts($conn)
             ?>
 
             <tr>
-                <td><img class="productImage" src="<?php print strip_tags($row['Image']); ?>"</td>
+                <td><img class="productImage" src="images/<?php print strip_tags($row['Image']); ?>"</td>
                 <td> <?php print strip_tags($row['Name']) ?> </td>
                 <td> <?php print strip_tags($row['Description']) ?> </td>
                 <td> <?php print strip_tags($row['Price']) ?> </td>

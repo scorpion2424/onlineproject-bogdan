@@ -11,7 +11,7 @@
         function listProducts($conn)
         {
 
-            if(isset($_SESSION['userCommand'])){
+            if(isset($_SESSION['userCommand']) && count($_SESSION['userCommand'])>0){
                 $productsNumber=count($_SESSION['userCommand']);
                 ?>
                 <table>
@@ -49,13 +49,25 @@
                 </table>
             <?php }
         }
-    $to      = $_GET['email'];
-    $subject = 'Bellow is your order';
-        $message = listProducts($conn);
-    $headers = 'From: webmaster@shop.com' . "\r\n" .
-        'X-Mailer: PHP/' . phpversion();
 
-    mail($to, $subject, $message, $headers);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         session_unset();
     ?>
         <p>In short time you will receive an email about your order.Thank you for chosing us!</p>
