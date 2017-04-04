@@ -2,7 +2,6 @@
     <?php
     include 'connection.php';
     include 'header.php';
-    print_r($email_order);
     ?>
     <div id="content">
         <?php
@@ -60,16 +59,27 @@
                 <th>Name</th>
                 <th>Price</th>
             </tr>');
+        if(isset($_SESSION['userCommand']) && count($_SESSION['userCommand'])>0){
+        $productsNumber=count($_SESSION['userCommand']);
+            }
+            else
+                $productsNumber=0;
+            $i=0;
+            while ($productsNumber > 0) {
+                $productID = $_SESSION['userCommand'][$i];
+                $sql = "SELECT ID, Name,  Price  FROM products WHERE ID='$productID'";
+                foreach ($conn->query($sql) as $row) {
 
-            $sql = 'SELECT ID, Image, Name,  Description, Price  FROM products';
-            foreach ($conn->query($sql) as $row) {
+                    array_push($email_order,'<tr>');
+                    array_push($email_order,'<td>');  array_push($email_order, htmlentities($row['Name'])); array_push($email_order,'</td>');
+                    array_push($email_order,'<td>'); array_push($email_order, htmlentities($row['Price'])); array_push($email_order,'</td>');
+                    array_push($email_order,'</tr>');
+                    $totalPriceProducts+= htmlentities($row['Price']);
 
-                array_push($email_order,'<tr>');
-                array_push($email_order,'<td>');  array_push($email_order, htmlentities($row['Name'])); array_push($email_order,'</td>');
-                array_push($email_order,'<td>'); array_push($email_order, htmlentities($row['Price'])); array_push($email_order,'</td>');
-                array_push($email_order,'</tr>');
-                $totalPriceProducts+= htmlentities($row['Price']);
-            };
+                }
+                $i++;
+                $productsNumber--;
+            }
             array_push($email_order,'</table>');
             array_push($email_order,'<style> table{
              margin:0 auto;
