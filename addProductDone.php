@@ -2,17 +2,7 @@
 include 'connection.php';
 include 'checkLogin.php';
 include 'header.php';
-/*
-echo strlen(trim(strip_tags($_POST['productName'])));
-echo strlen(trim(strip_tags($_POST['description'])));
-if( is_numeric($_POST['price'])){
-    echo 'is numeric';
-}
-else{
-    echo 'is NOT numeric';
-}
 
-*/
 if(strlen(trim(strip_tags($_POST['productName'])))===0 &&
        strlen(trim(strip_tags($_POST['description'])))===0 &&
        !is_numeric($_POST['price'])){

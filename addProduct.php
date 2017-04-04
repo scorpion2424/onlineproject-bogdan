@@ -3,31 +3,58 @@ include 'connection.php';
 include 'checkLogin.php';
 include 'header.php';
 
-function addProduct($conn)
-{
-    ?>
-    <table>
-        <tr>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Edit</th>
-        </tr>
-        <form id="editDetails" method="post" action="http://localhost:90/project-bogdan/addProductDone.php" enctype="multipart/form-data">
+    function addProduct($conn)
+    {
+        ?>
+        <table>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Edit</th>
+            </tr>
+            <?php
+             $inputIsCorrect=false;
+            if(isset($_POST['submit'])) { //check if form was submitted
+                if (strlen(trim(strip_tags($_POST['productName']))) > 0 &&
+                    strlen(trim(strip_tags($_POST['description']))) > 0 &&
+                    is_numeric($_POST['price'])
+                ) {
+                    $inputIsCorrect = true;
+                }
+            }
+            ?>
+            <form class="editDetails" method="post"  action = "<?php if($inputIsCorrect==true){echo'http://localhost:90/project-bogdan/addProductDone.php';}?>" enctype="multipart/form-data">
+
             <tr>
 
                 <td><input type="file" name="image" id="fileToUpload"></td>
                 <td><input type="text" name="productName" placeholder="name..."><br></td>
                 <td><input type="text" name="description" placeholder="description..."><br></td>
                 <td><input type="text" name="price" placeholder="price..."><br></td>
-                <td> <button  type="submit" name="submit">Submit changes</button></td>
+                <td>
+                    <button type="submit" name="submit">Submit changes</button>
+                </td>
 
-        </form>
-        </tr>
-    </table>
-    <?php
-}
+                </form>
+            </tr>
+        </table>
+        <?php if(isset($_POST['submit']))
+            {
+                if(!$inputIsCorrect) {
+                    ?>
+                    <div class="insertErrorMessage">
+    <span>Your product was NOT inserted into the database. </span><br/>
+    <span>The following problems have occurred:</span><br/>
+             <?php if(strlen(trim(strip_tags($_POST['productName']))) === 0) {echo 'Product name is invalid.<br/>';}?>
+             <?php if(strlen(trim(strip_tags($_POST['description']))) === 0) {echo 'Description is invalid.<br/>';}?>
+             <?php if(!is_numeric($_POST['price'])) {echo 'Price is invalid.<br/>';}?>
+                    </div>
+                <?php }
+            } ?>
+   <?php }
+
     function editProduct($conn)
     {
         ?>
@@ -65,17 +92,12 @@ function addProduct($conn)
         <?php
     }
 
-?>
-    <?php
+
     if(isset($_GET['product'])) {
         editProduct($conn);
     }
     elseif(!isset($_GET['product'])){
         addProduct($conn);
     }
-
-    ?>
-<?php
 include 'footer.php';
 ?>
-

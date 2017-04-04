@@ -74,6 +74,12 @@ z-index: -1;
     font-size: 1em;
     display: none;
 }
+.insertErrorMessage{
+    text-align: center;
+    color:red;
+    font-family: Charcoal,sans-serif;
+    font-size: 2em;
+}
 #cart img{
 width: 100px;
 height: 100px;

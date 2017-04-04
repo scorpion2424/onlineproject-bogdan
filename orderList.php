@@ -1,4 +1,3 @@
-<body>
 <div id="wrapper">
 <?php
 include 'connection.php';
@@ -79,4 +78,3 @@ include 'footer.php';
 
 ?>
 </div>
-</body>
