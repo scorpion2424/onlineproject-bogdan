@@ -15,8 +15,8 @@ include 'header.php';
                 <th>Edit</th>
             </tr>
             <?php
-             $inputIsCorrect=false;
-            if(isset($_POST['submit'])) { //check if form was submitted
+            $inputIsCorrect = false;
+            if (isset($_POST['submit'])) { //check if form was submitted
                 if (strlen(trim(strip_tags($_POST['productName']))) > 0 &&
                     strlen(trim(strip_tags($_POST['description']))) > 0 &&
                     is_numeric($_POST['price'])
@@ -25,35 +25,41 @@ include 'header.php';
                 }
             }
             ?>
-            <form class="editDetails" method="post"  action = "<?php if($inputIsCorrect==true){echo'http://localhost:90/project-bogdan/addProductDone.php';}?>" enctype="multipart/form-data">
+            <form class="editDetails" method="post" action="http://localhost:90/project-bogdan/addProductDone.php"
+                  enctype="multipart/form-data">
 
-            <tr>
+                <tr>
 
-                <td><input type="file" name="image" id="fileToUpload"></td>
-                <td><input type="text" name="productName" placeholder="name..."><br></td>
-                <td><input type="text" name="description" placeholder="description..."><br></td>
-                <td><input type="text" name="price" placeholder="price..."><br></td>
-                <td>
-                    <button type="submit" name="submit">Submit changes</button>
-                </td>
+                    <td><input type="file" name="image" id="fileToUpload"></td>
+                    <td><input type="text" name="productName" placeholder="name..."><br></td>
+                    <td><input type="text" name="description" placeholder="description..."><br></td>
+                    <td><input type="text" name="price" placeholder="price..."><br></td>
+                    <td>
+                        <button type="submit" name="submit">Submit changes</button>
+                    </td>
 
-                </form>
+            </form>
             </tr>
         </table>
-        <?php if(isset($_POST['submit']))
-            {
-                if(!$inputIsCorrect) {
-                    ?>
-                    <div class="insertErrorMessage">
-    <span>Your product was NOT inserted into the database. </span><br/>
-    <span>The following problems have occurred:</span><br/>
-             <?php if(strlen(trim(strip_tags($_POST['productName']))) === 0) {echo 'Product name is invalid.<br/>';}?>
-             <?php if(strlen(trim(strip_tags($_POST['description']))) === 0) {echo 'Description is invalid.<br/>';}?>
-             <?php if(!is_numeric($_POST['price'])) {echo 'Price is invalid.<br/>';}?>
-                    </div>
-                <?php }
-            } ?>
-   <?php }
+        <?php if (isset($_POST['submit'])) {
+        if ($inputIsCorrect == false) {
+            ?>
+            <div class="insertErrorMessage">
+                <span>Your product was NOT inserted into the database. </span><br/>
+                <span>The following problems have occurred:</span><br/>
+                <?php if (strlen(trim(strip_tags($_POST['productName']))) === 0) {
+                    echo 'Product name is invalid.<br/>';
+                } ?>
+                <?php if (strlen(trim(strip_tags($_POST['description']))) === 0) {
+                    echo 'Description is invalid.<br/>';
+                } ?>
+                <?php if (!is_numeric($_POST['price'])) {
+                    echo 'Price is invalid.<br/>';
+                } ?>
+            </div>
+        <?php }
+    }
+    }
 
     function editProduct($conn)
     {
@@ -67,12 +73,20 @@ include 'header.php';
                 <th>Edit</th>
             </tr>
             <?php
-                $productID = $_GET['product'];
+             $inputIsCorrect=false;
+            if(isset($_POST['submit'])) { //check if form was submitted
+                if (strlen(trim(strip_tags($_POST['productName']))) > 0 &&
+                    strlen(trim(strip_tags($_POST['description']))) > 0 &&
+                    is_numeric($_POST['price'])) {
+                    $inputIsCorrect = true;
+                }
+            }
+                $productID = strip_tags($_GET['product']);
                 $sql = "SELECT ID, Image, Name,  Description, Price  FROM products WHERE ID='$productID'";
                 foreach ($conn->query($sql) as $row) {
                     ?>
                     <form id="editDetails" method="post"
-                          action="http://localhost:90/project-bogdan/addProductDone.php?product=<?php echo htmlentities($row['ID']) ?> " enctype="multipart/form-data">
+                          action="<?php if($inputIsCorrect===true){echo "http://localhost:90/project-bogdan/addProductDone.php?product=$productID";} ?> " enctype="multipart/form-data">
                         <tr>
                             <td><div class="productImageWrapper"><span class="addNewImage">Add a new image:<br><input type="file" name="image" id="fileToUpload"></span><img class="productImage" src="images/<?php print htmlentities($row['Image']); ?>"</div></td>
                             <td><input type="text" name="productName" value="<?php echo htmlentities($row['Name']) ?>"><br></td>
@@ -89,7 +103,19 @@ include 'header.php';
                 }
                 ?>
         </table>
-        <?php
+        <?php if(isset($_POST['submit']))
+        {
+            if($inputIsCorrect===false) {
+                ?>
+                <div class="insertErrorMessage">
+                    <span>Your product was NOT inserted into the database. </span><br/>
+                    <span>The following problems have occurred:</span><br/>
+                    <?php if(strlen(trim(strip_tags($_POST['productName']))) === 0) {echo 'Product name is invalid.<br/>';}?>
+                    <?php if(strlen(trim(strip_tags($_POST['description']))) === 0) {echo 'Description is invalid.<br/>';}?>
+                    <?php if(!is_numeric($_POST['price'])) {echo 'Price is invalid.<br/>';}?>
+                </div>
+            <?php }
+        }
     }
 
 
