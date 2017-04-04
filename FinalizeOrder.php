@@ -9,7 +9,7 @@ include 'header.php';
     <form method="post" action="http://localhost:90/project-bogdan/orderCompleted.php" >
         First Name: <input type="text" name="firstName" placeholder="First Name..."><br>
         Last Name: <input type="text" name="lastName" placeholder="Last Name..."><br>
-        Email: <input type="text" name="email" placeholder="name@someone.com"><br>
+        Email: <input type="text" name="email" placeholder="name@email.com"><br>
         <input type="submit" value="Send the order">
     </form>
         </div>
