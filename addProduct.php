@@ -83,11 +83,26 @@ include 'header.php';
                  ?>
                  <form id="editDetails" method="post" action="" enctype="multipart/form-data">
                      <tr>
-                         <td><div class="productImageWrapper"><span class="addNewImage">Add a new image:<br><input type="file" name="image" id="fileToUpload"></span><img class="productImage" src="images/<?php print htmlentities($row['Image']); ?>"</div></td>
-                         <td><input type="text" name="productName" value="<?php echo htmlentities($row['Name']) ?>"><br></td>
+                         <td><div class="productImageWrapper"><span class="addNewImage">Add a new image:
+                   <br><input type="file" name="image" id="fileToUpload"></span><img class="productImage"
+                    src="images/<?php print htmlentities($row['Image']); ?>"</div></td>
+                         <td><input type="text" name="productName" value=" <?php
+                             if(isset($_POST['productName'])){
+                                 echo htmlentities($_POST['productName']);}
+                             else{echo htmlentities($row['Name']); }
+                             ?>"><br></td>
                          <td><input type="text" name="description"
-                                    value="<?php echo htmlentities($row['Description']) ?>"><br></td>
-                         <td><input type="text" name="price" value="<?php echo htmlentities($row['Price']) ?>"><br></td>
+                                    value=" <?php
+                                    if(isset($_POST['description'])){
+                                        echo htmlentities($_POST['description']);}
+                                    else{echo htmlentities($row['Description']); }
+                                    ?>"><br></td>
+                         <td><input type="text" name="price"
+                                    value=" <?php
+                                    if(isset($_POST['price'])){
+                                        echo htmlentities($_POST['price']);}
+                                    else{echo htmlentities($row['Price']); }
+                                    ?>"><br></td>
                          <td>
                              <button type="submit">Submit changes</button>
                          </td>
