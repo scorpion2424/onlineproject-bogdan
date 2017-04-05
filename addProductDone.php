@@ -2,7 +2,13 @@
 include 'connection.php';
 include 'checkLogin.php';
 include 'header.php';
-
+/*
+if(isset($_POST["productName"])){
+    echo $_POST["productName"];
+}elseif (!isset($_POST["productName"])){
+    echo 'is not set';
+}
+*/
 if(strlen(trim(strip_tags($_POST['productName'])))===0 &&
        strlen(trim(strip_tags($_POST['description'])))===0 &&
        !is_numeric($_POST['price'])){
@@ -36,8 +42,6 @@ function addImage(){
            // echo "Success";
         }else{
             print_r($errors);
-            header('Location: http://localhost:90/project-bogdan/adminPage.php');
-            exit();
         }
 }
 if(isset($_FILES['image']) && $_FILES['image']['size']>0) {
