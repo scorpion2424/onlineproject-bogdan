@@ -20,7 +20,7 @@ function listProducts($conn)
     $productsNumber=count($_SESSION['userCommand']);
         ?>
         <div id="shopFromUs"><span>Your cart</span>
-            <span clas="processOrder"><a href="http://localhost:90/project-bogdan/FinalizeOrder.php">Process the order:</a></span>
+            <span class="processOrder"><a href="http://localhost:90/project-bogdan/FinalizeOrder.php">Process the order:</a></span>
         </div>
         <table>
         <tr>
@@ -66,9 +66,7 @@ function listProducts($conn)
 
 <div id="content">
 
-                <?php
-            listProducts($conn);
-                ?>
+    <?php listProducts($conn); ?>
 
 </div>
     <div class="freeSpace"></div>

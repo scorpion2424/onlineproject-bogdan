@@ -3,8 +3,6 @@ include 'connection.php';
 include 'checkLogin.php';
 include 'header.php';
 
-    checkErrors();
-
     if(isset($_FILES['image']) && $_FILES['image']['size']>0) {
         addImage();
     }
@@ -139,6 +137,8 @@ include 'header.php';
 
              $stmt->execute();
              // echo "Product updated";
+             header('Location: http://localhost:90/project-bogdan/adminPage.php');
+             exit();
          } catch (PDOException $e) {
              echo "Error: " . $e->getMessage();
          }
