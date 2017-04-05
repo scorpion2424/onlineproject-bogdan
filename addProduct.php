@@ -23,205 +23,185 @@ include 'header.php';
 
     if(checkErrors() == true) {
         insertIntoDatabase($conn);
-    }
+     }
 
-    function checkErrors(){
-        if (isset($_POST['submit'])) { //check if form was submitted
-            if (isset($_POST["productName"]) && strlen(trim(strip_tags($_POST["productName"]))) > 0 && isset($_POST["description"]) &&
-                strlen(trim(strip_tags($_POST["description"]))) > 0 && isset($_POST["price"]) && is_numeric($_POST["price"])) {
-                return true;
-            }
-        }
-        return false;
-    }
-    function addProduct($conn)
-    {
-        ?>
-        <table>
-            <tr>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Edit</th>
-            </tr>
-            <?php
-            //http://localhost:90/project-bogdan/addProductDone.php
-            ?>
-            <form class="editDetails" method="post" action=""
-                  enctype="multipart/form-data">
+ function checkErrors(){
+       //  if (isset($_POST['submit'])) { //check if form was submitted
+             if (isset($_POST["productName"]) && strlen(trim(strip_tags($_POST["productName"]))) > 0 && isset($_POST["description"]) &&
+                 strlen(trim(strip_tags($_POST["description"]))) > 0 && isset($_POST["price"]) && is_numeric($_POST["price"])) {
+                 return true;
+             }
+         //}
+     return false;
+     }
+ function addProduct($conn)
+ {
+     ?>
+     <table>
+         <tr>
+             <th>Image</th>
+             <th>Name</th>
+             <th>Description</th>
+             <th>Price</th>
+             <th>Edit</th>
+         </tr>
+         <?php
+         //http://localhost:90/project-bogdan/addProductDone.php
+         ?>
+         <form class="editDetails" method="post" action=""
+               enctype="multipart/form-data">
 
-                <tr>
+             <tr>
 
-                    <td><input type="file" name="image" id="fileToUpload"></td>
-                    <td><input type="text" name="productName" placeholder="name..."><br></td>
-                    <td><input type="text" name="description" placeholder="description..."><br></td>
-                    <td><input type="text" name="price" placeholder="price..."><br></td>
-                    <td>
-                        <button type="submit" name="submit">Submit changes</button>
-                    </td>
+                 <td><input type="file" name="image" id="fileToUpload"></td>
+                 <td><input type="text" name="productName" placeholder="name..."><br></td>
+                 <td><input type="text" name="description" placeholder="description..."><br></td>
+                 <td><input type="text" name="price" placeholder="price..."><br></td>
+                 <td>
+                     <button type="submit" name="submit">Submit changes</button>
+                 </td>
 
-            </form>
-            </tr>
-        </table>
+         </form>
+         </tr>
+     </table>
 <?php
-    }
-    function editProduct($conn)
-    {
-        ?>
-        <table>
-            <tr>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Edit</th>
-            </tr>
-            <?php
-             $inputIsCorrect=false;
-            if(isset($_POST['submit'])) { //check if form was submitted
-                if (strlen(trim(strip_tags($_POST['productName']))) > 0 &&
-                    strlen(trim(strip_tags($_POST['description']))) > 0 &&
-                    is_numeric($_POST['price'])) {
-                    $inputIsCorrect = true;
-                }
-            }
-                $productID = strip_tags($_GET['product']);
-                $sql = "SELECT ID, Image, Name,  Description, Price  FROM products WHERE ID='$productID'";
-                foreach ($conn->query($sql) as $row) {
-                    ?>
-                    <form id="editDetails" method="post"
-                          action="<?php if($inputIsCorrect===true){echo "http://localhost:90/project-bogdan/addProductDone.php?product=$productID";} ?> " enctype="multipart/form-data">
-                        <tr>
-                            <td><div class="productImageWrapper"><span class="addNewImage">Add a new image:<br><input type="file" name="image" id="fileToUpload"></span><img class="productImage" src="images/<?php print htmlentities($row['Image']); ?>"</div></td>
-                            <td><input type="text" name="productName" value="<?php echo htmlentities($row['Name']) ?>"><br></td>
-                            <td><input type="text" name="description"
-                                       value="<?php echo htmlentities($row['Description']) ?>"><br></td>
-                            <td><input type="text" name="price" value="<?php echo htmlentities($row['Price']) ?>"><br></td>
-                            <td>
-                                <button type="submit">Submit changes</button>
-                            </td>
+ }
+ function editProduct($conn)
+ {
+     ?>
+     <table>
+         <tr>
+             <th>Image</th>
+             <th>Name</th>
+             <th>Description</th>
+             <th>Price</th>
+             <th>Edit</th>
+         </tr>
+         <?php
 
-                    </form>
-                    </tr>
-                    <?php
-                }
-                ?>
-        </table>
-        <?php if(isset($_POST['submit']))
-        {
-            if($inputIsCorrect===false) {
-                ?>
-                <div class="insertErrorMessage">
-                    <span>Your product was NOT inserted into the database. </span><br/>
-                    <span>The following problems have occurred:</span><br/>
-                    <?php if(strlen(trim(strip_tags($_POST['productName']))) === 0) {echo 'Product name is invalid.<br/>';}?>
-                    <?php if(strlen(trim(strip_tags($_POST['description']))) === 0) {echo 'Description is invalid.<br/>';}?>
-                    <?php if(!is_numeric($_POST['price'])) {echo 'Price is invalid.<br/>';}?>
-                </div>
-            <?php }
-        }
-    }
-    function addImage(){
+             $productID = strip_tags($_GET['product']);
+             $sql = "SELECT ID, Image, Name,  Description, Price  FROM products WHERE ID='$productID'";
+             foreach ($conn->query($sql) as $row) {
+                 ?>
+                 <form id="editDetails" method="post" action="" enctype="multipart/form-data">
+                     <tr>
+                         <td><div class="productImageWrapper"><span class="addNewImage">Add a new image:<br><input type="file" name="image" id="fileToUpload"></span><img class="productImage" src="images/<?php print htmlentities($row['Image']); ?>"</div></td>
+                         <td><input type="text" name="productName" value="<?php echo htmlentities($row['Name']) ?>"><br></td>
+                         <td><input type="text" name="description"
+                                    value="<?php echo htmlentities($row['Description']) ?>"><br></td>
+                         <td><input type="text" name="price" value="<?php echo htmlentities($row['Price']) ?>"><br></td>
+                         <td>
+                             <button type="submit">Submit changes</button>
+                         </td>
 
-        $errors= array();
-        $file_name = $_FILES['image']['name'];
-        $file_size =$_FILES['image']['size'];
-        $file_tmp =$_FILES['image']['tmp_name'];
-        $file_type=$_FILES['image']['type'];
-        $file_ext=strtolower(end(explode('.',$_FILES['image']['name'])));
+                 </form>
+                 </tr>
+                 <?php
+             } ?>
+     </table>
+ <?php }
+ function addImage(){
 
-        $expensions= array("jpeg","jpg","png");
+     $errors= array();
+     $file_name = $_FILES['image']['name'];
+     $file_size =$_FILES['image']['size'];
+     $file_tmp =$_FILES['image']['tmp_name'];
+     $file_type=$_FILES['image']['type'];
+     $file_ext=strtolower(end(explode('.',$_FILES['image']['name'])));
 
-        if(in_array($file_ext,$expensions)=== false){
-            $errors[]="extension not allowed, please choose a JPEG or PNG file.";
-        }
+     $expensions= array("jpeg","jpg","png");
 
-        if($file_size > 2097152){
-            $errors[]='File size must be less than 2 MB';
-        }
+     if(in_array($file_ext,$expensions)=== false){
+         $errors[]="extension not allowed, please choose a JPEG or PNG file.";
+     }
 
-        if(empty($errors)==true){
-            move_uploaded_file($file_tmp,"images/".$file_name);
-            // echo "Success";
-        }else{
-            print_r($errors);
-        }
-    }
-    function insertIntoDatabase($conn){
-        if(!isset($_GET['product'])) {
-            try {
-                $stmt = $conn->prepare("INSERT INTO `products`(Image,Name,Description,Price)  VALUES (:productImage, :productName, :productDescription, :productPrice) ");
+     if($file_size > 2097152){
+         $errors[]='File size must be less than 2 MB';
+     }
 
-                $productImage = $_FILES['image']['name'];
-                $stmt->bindParam(':productImage', strip_tags($productImage));
-                $stmt->bindParam(':productName', strip_tags($_POST["productName"]));
-                $stmt->bindParam(':productDescription', strip_tags($_POST["description"]));
-                $stmt->bindParam(':productPrice', strip_tags($_POST["price"]));
+     if(empty($errors)==true){
+         move_uploaded_file($file_tmp,"images/".$file_name);
+         // echo "Success";
+     }else{
+         print_r($errors);
+     }
+ }
+ function insertIntoDatabase($conn){
+     if(!isset($_GET['product'])) {
+         try {
+             $stmt = $conn->prepare("INSERT INTO `products`(Image,Name,Description,Price)  VALUES (:productImage, :productName, :productDescription, :productPrice) ");
 
-                $stmt->execute();
-                // echo "Product updated";
-            } catch (PDOException $e) {
-                echo "Error: " . $e->getMessage();
-            }
-        }
+             $productImage = $_FILES['image']['name'];
+             $stmt->bindParam(':productImage', strip_tags($productImage));
+             $stmt->bindParam(':productName', strip_tags($_POST["productName"]));
+             $stmt->bindParam(':productDescription', strip_tags($_POST["description"]));
+             $stmt->bindParam(':productPrice', strip_tags($_POST["price"]));
 
-        elseif(isset($_GET['product'])){
-            try {
+             $stmt->execute();
+             // echo "Product updated";
+         } catch (PDOException $e) {
+             echo "Error: " . $e->getMessage();
+         }
+     }
 
-                if(isset($_FILES['image']) &&  $_FILES['image']['size']>0) {
-                    $productImage = $_FILES['image']['name'];
-                    $stmt = $conn->prepare("UPDATE `products` SET `Image` = :productImage, `name` = :productName , `description`=:productDescription ,
-                          `price`=:productPrice WHERE `ID` = :productID ");
-                    $stmt->bindParam(':productImage', $productImage);
-                }
-                elseif(!isset($_FILES['image']) || $_FILES['image']['size']<1){
+     elseif(isset($_GET['product'])){
+         try {
+             if(isset($_FILES['image']) &&  $_FILES['image']['size']>0) {
+                 $productImage = $_FILES['image']['name'];
+                 $stmt = $conn->prepare("UPDATE `products` SET `Image` = :productImage, `name` = :productName , `description`=:productDescription ,
+                       `price`=:productPrice WHERE `ID` = :productID ");
+                 $stmt->bindParam(':productImage', $productImage);
+             }
+             elseif(!isset($_FILES['image']) || $_FILES['image']['size']<1){
 
-                    $stmt = $conn->prepare("UPDATE `products` SET  `name` = :productName , `description`=:productDescription ,
-                          `price`=:productPrice WHERE `ID` = :productID ");
-                }
+                 $stmt = $conn->prepare("UPDATE `products` SET  `name` = :productName , `description`=:productDescription ,
+                       `price`=:productPrice WHERE `ID` = :productID ");
+             }
 
-                $stmt->bindParam(':productID', strip_tags($_GET['product']));
-                $stmt->bindParam(':productName', strip_tags($_POST["productName"]));
-                $stmt->bindParam(':productDescription', strip_tags($_POST["description"]));
-                $stmt->bindParam(':productPrice', strip_tags($_POST["price"]));
+             $stmt->bindParam(':productID', strip_tags($_GET['product']));
+             $stmt->bindParam(':productName', strip_tags($_POST["productName"]));
+             $stmt->bindParam(':productDescription', strip_tags($_POST["description"]));
+             $stmt->bindParam(':productPrice', strip_tags($_POST["price"]));
 
 
 
-                $stmt->execute();
-                // echo "Product updated";
-            }
-            catch(PDOException $e)
-            {
-                echo "Error: " . $e->getMessage();
-            }
-        }
-    }
-    function displayErrors(){
-        ?>
-        <div class="insertErrorMessage">
-            <span>Your request was NOT processed.</span></br>
-            <span>The following problems was encured:</span>
-            <span><?php if(isset($_POST["productName"])){
-                    if(strlen(trim(strip_tags($_POST["productName"]))) === 0)
-                    {
-                        echo 'The name is invalid.';
-                    }
-                }?></span>
-            <span><?php if(isset($_POST["description"])){
-                    if(strlen(trim(strip_tags($_POST["description"]))) === 0)
-                    {
-                        echo 'The description is invalid.';
-                    }
-                }?></span>
-            <span><?php if(isset($_POST["price"])){
-                    if(!is_numeric($_POST["price"]))
-                    {
-                        echo 'The price is invalid.';
-                    }
-                }?></span>
-        </div>
-        <?php
-    }
-    include 'footer.php';
+             $stmt->execute();
+             // echo "Product updated";
+             header('Location: http://localhost:90/project-bogdan/adminPage.php');
+             exit();
+         }
+         catch(PDOException $e)
+         {
+            echo "Error: " . $e->getMessage();
+         }
+     }
+
+ }
+ function displayErrors(){
+     ?>
+     <div class="insertErrorMessage">
+<!--         </br><span>Your request was NOT processed.</span></br>
+          <span>The following problems were incurred:</span></br>
+-->          <p><?php if(isset($_POST["productName"])){
+                 if(strlen(trim(strip_tags($_POST["productName"]))) === 0)
+                 {
+                     echo 'The name is invalid.';
+                 }
+             }?></p>
+         <p><?php if(isset($_POST["description"])){
+                 if(strlen(trim(strip_tags($_POST["description"]))) === 0)
+                 {
+                     echo 'The description is invalid.';
+                 }
+             }?></p>
+         <p><?php if(isset($_POST["price"])){
+                 if(!is_numeric($_POST["price"]))
+                 {
+                     echo 'The price is invalid.';
+                 }
+             }?></p>
+     </div>
+     <?php
+ }
+ include 'footer.php';
 ?>
