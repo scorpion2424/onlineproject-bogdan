@@ -52,9 +52,18 @@ include 'header.php';
              <tr>
 
                  <td><input type="file" name="image" id="fileToUpload"></td>
-                 <td><input type="text" name="productName" placeholder="name..."><br></td>
-                 <td><input type="text" name="description" placeholder="description..."><br></td>
-                 <td><input type="text" name="price" placeholder="price..."><br></td>
+                 <td><input type="text" name="productName" value="<?php
+                     if(isset($_POST['productName'])){
+                         echo htmlentities($_POST['productName']);}
+                     ?>"><br></td>
+                 <td><input type="text" name="description" value="<?php
+                     if(isset($_POST['description'])){
+                         echo htmlentities($_POST['description']);}
+                     ?>"><br></td>
+                 <td><input type="text" name="price" value="<?php
+                     if(isset($_POST['price'])){
+                         echo htmlentities($_POST['price']);}
+                     ?>"><br></td>
                  <td>
                      <button type="submit" name="submit">Submit changes</button>
                  </td>
@@ -86,19 +95,19 @@ include 'header.php';
                          <td><div class="productImageWrapper"><span class="addNewImage">Add a new image:
                    <br><input type="file" name="image" id="fileToUpload"></span><img class="productImage"
                     src="images/<?php print htmlentities($row['Image']); ?>"</div></td>
-                         <td><input type="text" name="productName" value=" <?php
+                         <td><input type="text" name="productName" value="<?php
                              if(isset($_POST['productName'])){
                                  echo htmlentities($_POST['productName']);}
                              else{echo htmlentities($row['Name']); }
                              ?>"><br></td>
                          <td><input type="text" name="description"
-                                    value=" <?php
+                                    value="<?php
                                     if(isset($_POST['description'])){
                                         echo htmlentities($_POST['description']);}
                                     else{echo htmlentities($row['Description']); }
                                     ?>"><br></td>
                          <td><input type="text" name="price"
-                                    value=" <?php
+                                    value="<?php
                                     if(isset($_POST['price'])){
                                         echo htmlentities($_POST['price']);}
                                     else{echo htmlentities($row['Price']); }
