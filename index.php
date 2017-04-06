@@ -8,6 +8,17 @@ include 'header.php';
     <div id="content">
 
 <?php
+/*
+@listProducts
+This function will display all the products from the database.
+@products is the table where all the products's informations are kept.
+Every product has in the database 5 rows:
+    -ID(which is unique for every product)
+    -Image
+    -Name
+    -Description
+    -Price
+ */
 function listProducts($conn) {
 
     $sql = 'SELECT ID, Image, Name,  Description, Price  FROM products';
@@ -15,32 +26,62 @@ function listProducts($conn) {
         ?>
 
         <tr>
-        <td>  <img class ="productImage" src="images/<?php print htmlentities($row['Image']); ?>"  </td>
-        <td> <?php print htmlentities($row['Name']) ?> </td>
-        <td> <?php print htmlentities($row['Description']) ?> </td>
-        <td> <?php print htmlentities($row['Price']) ?> </td>
-       <td> <a href="http://localhost:90/project-bogdan/orderList.php?product=<?php echo htmlentities($row['ID']);?> ">Add to cart</a></td>
+
+            <td>
+                <img class ="productImage" src="images/<?= htmlentities($row['Image']); ?>"/>
+            </td>
+
+            <td>
+                <?= htmlentities($row['Name']) ?>
+            </td>
+
+            <td>
+                <?= htmlentities($row['Description']) ?>
+            </td>
+
+            <td>
+                <?= htmlentities($row['Price']) ?>
+            </td>
+
+           <td>
+               <a href="http://localhost:90/project-bogdan/orderList.php?product=<?= htmlentities($row['ID']);?> ">
+                   Add to cart
+               </a>
+           </td>
+
         </tr>
         <?php
     }
 }
 ?>
 
-<table>
-<tr>
-    <th>Image</th>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Price</th>
-    <th>Buy</th>
-</tr>
-<?php listProducts($conn); ?>
-</table>
-</div>
+        <table>
+            <tr>
+                <th>
+                    Image
+                </th>
 
+                <th>
+                    Name
+                </th>
 
-</body>
-<?php
-include 'footer.php';
-?>
+                <th>
+                    Description
+                </th>
+
+                <th>
+                    Price
+                </th>
+
+                <th>
+                    Buy
+                </th>
+
+            </tr>
+            <?php listProducts($conn); ?>
+        </table>
+    </div>
+    <?php
+    include 'footer.php';
+    ?>
 </div>
