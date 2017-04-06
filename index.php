@@ -11,8 +11,8 @@ include 'header.php';
 /*
 @listProducts
 This function will display all the products from the database.
-@products is the table where all the products's informations are kept.
-Every product has in the database 5 rows:
+@param conn is the conection with databse, from connection.php
+@param sql is a query to the database which will return the following informations about any product:
     -ID(which is unique for every product)
     -Image
     -Name

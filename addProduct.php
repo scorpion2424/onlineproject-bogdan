@@ -24,8 +24,9 @@ include 'header.php';
 /*
  * @checkErrors
  * If all the fields are filled with valid data, the function return true
- * Else return false
+ * Otherwise the function return false
  */
+
 function checkErrors() {
        //  if (isset($_POST['submit'])) { //check if form was submitted
              if (
@@ -47,6 +48,7 @@ function checkErrors() {
  * When you press the button "Add a product", from the admin's page, this function is called.
  * There are 4 fields:image,name,description and price which you must complete all to insert a new product into the database.
  */
+
 function addProduct()
  {
      ?>
@@ -124,11 +126,13 @@ function addProduct()
      </table>
 <?php
  }
+
 /*
  @editProduct
 When you press the button "Edit", from the admin's page, this function is called.
 You can modify the existing data from a product: the image,the name, the description and the price.
  */
+
 function editProduct($conn)
 {
      ?>
@@ -200,13 +204,14 @@ function editProduct($conn)
              } ?>
      </table>
  <?php }
+
 /*
  @addImage
 When you upload a new photo, this function is called.
 You must upload a photo with one of this extensions: JPEG or PNG, and the photo's size must be less than 2 MB.
-Otherwise, the function will return an error.
-
+Otherwise, this function will return an error.
  */
+
  function addImage()
  {
 
@@ -234,11 +239,19 @@ Otherwise, the function will return an error.
          print_r($errors);
      }
  }
+
  /*
   @insertIntoDatabase
  If you complete all the field correctly, this function will be called and the product will be inserted or updated into
  the database.
+ @param $_GET['product'] is the ID of the product.
+ @stmt is a query which will insert into the database a new product with the following fields:
+    -Image
+    -Name
+    -Description
+    -Price
   */
+
  function insertIntoDatabase($conn) {
      if(!isset($_GET['product'])) {
          try {
@@ -316,11 +329,13 @@ Otherwise, the function will return an error.
      }
 
  }
+
  /*
   * @displayErrors
   If you insert invalid data in the fields(example:you entered letters instead of numbers in the field for price),
  the user will see an error, wich will say what data is invalid.
   */
+
  function displayErrors(){
      ?>
      <div class="insertErrorMessage">
